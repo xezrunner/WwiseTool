@@ -10,6 +10,7 @@ namespace WwiseTool.Pages {
         }
 
         private async void Page_Loaded(object sender, RoutedEventArgs e) {
+            await Task.Delay(750);
             Frame.Navigate(typeof(GetStarted));
         }
     }

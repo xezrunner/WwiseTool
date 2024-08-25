@@ -10,7 +10,7 @@
     Title="Wwise Tool">
 
     <Window.SystemBackdrop>
-        <MicaBackdrop />
+        <MicaBackdrop Kind="BaseAlt" />
     </Window.SystemBackdrop>
 
     <Grid x:Name="root" Loaded="root_Loaded"

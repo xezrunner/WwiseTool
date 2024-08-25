@@ -14,8 +14,8 @@ namespace WwiseTool {
             ExtendsContentIntoTitleBar = true;
         }
 
-        // NOTE: We have to use the 'root' control for its Loaded event to initialize XamlRoot stuff.
-        // Only after loading all the stuff is when we should load pages and other stuff.
+        // NOTE: We have to use the 'root' control for its Loaded event to get and assign the "canonical" XamlRoot.
+        // We should only load pages and such after this is assigned, as ContentDialogs need it!
         private void root_Loaded(object sender, RoutedEventArgs e) {
             // HACK: set XamlRoot regardless of activation state, since there's no Loaded event in WinUI3:
             // HACK: set XamlRoot globally, since this is the only window we'll have:

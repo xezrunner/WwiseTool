@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:WwiseTool.Resources">
+
+    <x:Double x:Key="TitlebarHeight">32</x:Double>
+    <Thickness x:Key="TitlebarHeightPadding">0,32,0,0</Thickness>
+
+</ResourceDictionary>

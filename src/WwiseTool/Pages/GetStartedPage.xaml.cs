@@ -9,6 +9,7 @@ namespace WwiseTool.Pages {
 
         private void ActionButton_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e) {
             //DialogUtilities.ShowMessage("Get started", "Action clicked!");
+            Frame.Navigate(typeof(ProjectPage));
         }
     }
 }

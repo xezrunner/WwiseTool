@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="WwiseTool.Pages.ProjectPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:WwiseTool.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource LayerFillColorDefaultBrush}">
+
+    <Page.Resources>
+        <Style TargetType="TreeViewItem">
+            <Setter Property="MinHeight" Value="40" />
+        </Style>
+    </Page.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition Width="2*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid Padding="{StaticResource TitlebarHeightPadding}">
+            <TreeView>
+                <TreeView.RootNodes>
+                    <TreeViewNode Content="bank-001.bnk" IsExpanded="False">
+                        <TreeViewNode.Children>
+                            <TreeViewNode Content="AkEvent [2001]" />
+                            <TreeViewNode Content="AkEvent [2001]" />
+                            <TreeViewNode Content="AkEvent [2001]" />
+                            <TreeViewNode Content="AkEvent [2001]" />
+                        </TreeViewNode.Children>
+                    </TreeViewNode>
+                </TreeView.RootNodes>
+            </TreeView>
+        </Grid>
+
+        <Grid Grid.Column="1">
+            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center">Content goes here...</TextBlock>
+
+        </Grid>
+
+    </Grid>
+
+</Page>

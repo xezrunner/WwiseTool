@@ -1,6 +1,5 @@
 using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
-using Windows.ApplicationModel;
 using WwiseTool.Pages;
 
 namespace WwiseTool {
@@ -19,7 +18,7 @@ namespace WwiseTool {
         private void root_Loaded(object sender, RoutedEventArgs e) {
             // HACK: set XamlRoot regardless of activation state, since there's no Loaded event in WinUI3:
             // HACK: set XamlRoot globally, since this is the only window we'll have:
-            App.GLOBAL_xamlRoot = root.XamlRoot;
+            App.GLOBAL_XamlRoot = root.XamlRoot;
 
             //TrySetMicaBackdrop(true);
 

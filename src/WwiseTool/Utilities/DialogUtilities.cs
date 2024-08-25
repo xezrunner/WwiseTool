@@ -15,7 +15,7 @@ namespace WwiseTool.Utilities {
             string primaryButtonText = null, string secondaryButtonText = null, string closeButtonText = "OK",
             ContentDialogButton defaultButton = ContentDialogButton.Primary) {
             ContentDialog dialog = new() {
-                XamlRoot = App.GLOBAL_xamlRoot,
+                XamlRoot = App.GLOBAL_XamlRoot,
                 Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"],
                 Title = title, Content = content,
                 PrimaryButtonText = primaryButtonText,

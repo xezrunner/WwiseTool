@@ -10,7 +10,7 @@ namespace WwiseTool {
         }
 
         // HACK: I don't care about setting the XamlRoot with each dialog. This should be set by the MainWindow.
-        public static XamlRoot GLOBAL_xamlRoot;
+        public static XamlRoot GLOBAL_XamlRoot;
 
         protected override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args) {
             m_window = new MainWindow();

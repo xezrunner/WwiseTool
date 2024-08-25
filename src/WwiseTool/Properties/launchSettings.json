@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "WwiseTool (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "WwiseTool (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}

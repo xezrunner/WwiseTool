@@ -6,9 +6,34 @@
     xmlns:local="using:WwiseTool"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d">
+    mc:Ignorable="d" 
+    Title="Wwise Tool">
 
-    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-        <Button x:Name="myButton" Click="myButton_Click">Click Me</Button>
-    </StackPanel>
+    <Window.SystemBackdrop>
+        <MicaBackdrop />
+    </Window.SystemBackdrop>
+
+    <Grid x:Name="root" Loaded="root_Loaded"
+          Background="{ThemeResource LayerFillColorDefaultBrush}">
+        
+        <Frame x:Name="testFrame" />
+
+        <Grid x:Name="titlebar" Loaded="titlebar_Loaded"
+              Height="32" VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition x:Name="titlebarLeftPadding" Width="0" />
+                <ColumnDefinition />
+                <ColumnDefinition x:Name="titlebarRightPadding" Width="0" />
+            </Grid.ColumnDefinitions>
+
+            <!-- Titlebar content -->
+            <Grid Grid.Column="1">
+                <TextBlock x:Name="titlebarAppTitle" Text="App title"
+                           FontSize="12"
+                           VerticalAlignment="Center" Padding="12,0"/>
+            </Grid>
+        </Grid>
+        
+    </Grid>
+    
 </Window>

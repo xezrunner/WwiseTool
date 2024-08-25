@@ -1,36 +1,56 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
+using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Controls.Primitives;
-using Microsoft.UI.Xaml.Data;
-using Microsoft.UI.Xaml.Input;
-using Microsoft.UI.Xaml.Media;
-using Microsoft.UI.Xaml.Navigation;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
+using Windows.ApplicationModel;
+using WwiseTool.Pages;
 
-// To learn more about WinUI, the WinUI project structure,
-// and more about our project templates, see: http://aka.ms/winui-project-info.
+namespace WwiseTool {
+    public sealed partial class MainWindow : Window {
+        AppWindow appWindow;
 
-namespace WwiseTool
-{
-    /// <summary>
-    /// An empty window that can be used on its own or navigated to within a Frame.
-    /// </summary>
-    public sealed partial class MainWindow : Window
-    {
-        public MainWindow()
-        {
+        public MainWindow() {
             this.InitializeComponent();
+            appWindow = this.AppWindow; // cache
+
+            ExtendsContentIntoTitleBar = true;
         }
 
-        private void myButton_Click(object sender, RoutedEventArgs e)
-        {
-            myButton.Content = "Clicked";
+        // NOTE: We have to use the 'root' control for its Loaded event to initialize XamlRoot stuff.
+        // Only after loading all the stuff is when we should load pages and other stuff.
+        private void root_Loaded(object sender, RoutedEventArgs e) {
+            // HACK: set XamlRoot regardless of activation state, since there's no Loaded event in WinUI3:
+            // HACK: set XamlRoot globally, since this is the only window we'll have:
+            App.GLOBAL_xamlRoot = root.XamlRoot;
+
+            //TrySetMicaBackdrop(true);
+
+            testFrame.Navigate(typeof(Startup));
+        }
+
+        // From the WinUI3 Gallery app:
+        bool TrySetMicaBackdrop(bool useMicaAlt) {
+            if (Microsoft.UI.Composition.SystemBackdrops.MicaController.IsSupported()) {
+                Microsoft.UI.Xaml.Media.MicaBackdrop micaBackdrop = new Microsoft.UI.Xaml.Media.MicaBackdrop();
+                micaBackdrop.Kind = useMicaAlt ? Microsoft.UI.Composition.SystemBackdrops.MicaKind.BaseAlt : Microsoft.UI.Composition.SystemBackdrops.MicaKind.Base;
+                this.SystemBackdrop = micaBackdrop;
+
+                return true; // Succeeded.
+            }
+
+            return false; // Mica is not supported on this system.
+        }
+
+        private void titlebar_Loaded(object sender, RoutedEventArgs e) {
+            // App title label
+            // TODO: Set this up properly later:
+            //titlebarAppTitle.Text = AppInfo.Current.DisplayInfo.DisplayName;
+            titlebarAppTitle.Text = "Wwise Tool";
+
+            var titlebarXamlRoot = titlebar.XamlRoot;
+
+            titlebarLeftPadding.Width  = new GridLength(appWindow.TitleBar.LeftInset  / titlebarXamlRoot.RasterizationScale);
+            titlebarRightPadding.Width = new GridLength(appWindow.TitleBar.RightInset / titlebarXamlRoot.RasterizationScale);
+
+            SetTitleBar(titlebar);
         }
     }
 }

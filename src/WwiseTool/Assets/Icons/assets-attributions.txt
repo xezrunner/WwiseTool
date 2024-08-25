@@ -1,0 +1,8 @@
+TODO: Attribute these in-app:
+
+flaticon.com:
+
+- <a href="https://www.flaticon.com/free-icons/delivery" title="delivery icons">Delivery icons created by Chanut-is-Industries - Flaticon</a>
+- <a href="https://www.flaticon.com/free-icons/sound-wave" title="sound wave icons">Sound wave icons created by alfanz - Flaticon</a>
+- <a href="https://www.flaticon.com/free-icons/audio-file" title="audio file icons">Audio file icons created by Kiranshastry - Flaticon</a>
+- <a href="https://www.flaticon.com/free-icons/wrench" title="wrench icons">Wrench icons created by meaicon - Flaticon</a>

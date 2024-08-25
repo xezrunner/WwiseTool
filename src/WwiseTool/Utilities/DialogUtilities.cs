@@ -4,8 +4,11 @@ using Windows.Foundation;
 
 namespace WwiseTool.Utilities {
     public static class DialogUtilities {
-        public static IAsyncOperation<ContentDialogResult> ShowMessage(string title, string message) {
+        public static IAsyncOperation<ContentDialogResult> ShowMessageAsync(string title, string message) {
             return ShowDialogWithContent(title, new TextBlock() { Text = message });
+        }
+        public static void ShowMessage(string title, string message) {
+            _ = ShowDialogWithContent(title, new TextBlock() { Text = message });
         }
 
         public static IAsyncOperation<ContentDialogResult> ShowDialogWithContent(string title, UIElement content, 

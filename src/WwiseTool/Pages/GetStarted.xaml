@@ -6,11 +6,47 @@
     xmlns:local="using:WwiseTool.Pages"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:WwiseTool.Controls"
     mc:Ignorable="d"
     Background="{ThemeResource LayerFillColorDefaultBrush}"
     NavigationCacheMode="Enabled">
 
+    <Page.Resources>
+
+    </Page.Resources>
+
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition Width="1.35*" />
+        </Grid.ColumnDefinitions>
+
+        <controls:SplashIcon Grid.Column="0" />
+
+        <Grid Grid.Column="1">
+            <StackPanel VerticalAlignment="Center" Margin="64,0">
+                <TextBlock Text="Welcome to Wwise Tool!"
+                           Style="{StaticResource TitleTextBlockStyle}" />
+                
+                <TextBlock Text="Extract, browse and preview Wwise sound banks from your favorite games."
+                           FontWeight="Normal" Style="{StaticResource SubtitleTextBlockStyle}" />
+
+                <StackPanel Margin="0,28">
+                    <controls:ActionButton Glyph="&#xE8B7;" Click="ActionButton_Click"
+                                           Title="Open a folder"
+                                           Description="Navigate a folder of banks as a project structure" />
+
+                    <controls:ActionButton Glyph="&#xE8E5;" Click="ActionButton_Click"
+                                           Title="Open bank files"
+                                           Description="Open individual .pck/.bnk files manually" />
+
+                    <controls:ActionButton Glyph="&#xE81C;" Click="ActionButton_Click"
+                                           Title="Restore a session"
+                                           Description="Return to a previously started session" />
+                </StackPanel>
+
+            </StackPanel>
+        </Grid>
 
     </Grid>
     

@@ -4,14 +4,14 @@ using System;
 using System.Threading.Tasks;
 
 namespace WwiseTool.Pages {
-    public sealed partial class Startup : Page {
-        public Startup() {
+    public sealed partial class StartupPage : Page {
+        public StartupPage() {
             this.InitializeComponent();
         }
 
         private async void Page_Loaded(object sender, RoutedEventArgs e) {
             await Task.Delay(750);
-            Frame.Navigate(typeof(GetStarted));
+            Frame.Navigate(typeof(GetStartedPage));
         }
     }
 }

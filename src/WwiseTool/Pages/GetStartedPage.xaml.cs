@@ -2,8 +2,8 @@ using Microsoft.UI.Xaml.Controls;
 using WwiseTool.Utilities;
 
 namespace WwiseTool.Pages {
-    public sealed partial class GetStarted : Page {
-        public GetStarted() {
+    public sealed partial class GetStartedPage : Page {
+        public GetStartedPage() {
             this.InitializeComponent();
         }
 

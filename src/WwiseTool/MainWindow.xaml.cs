@@ -22,7 +22,7 @@ namespace WwiseTool {
 
             //TrySetMicaBackdrop(true);
 
-            testFrame.Navigate(typeof(Startup));
+            testFrame.Navigate(typeof(StartupPage));
         }
 
         // From the WinUI3 Gallery app:

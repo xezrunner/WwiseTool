@@ -16,8 +16,9 @@
     <None Remove="Colors.xaml" />
     <None Remove="Controls\ActionButton.xaml" />
     <None Remove="Controls\SplashIcon.xaml" />
-    <None Remove="Pages\GetStarted.xaml" />
-    <None Remove="Pages\Startup.xaml" />
+    <None Remove="Pages\GetStartedPage.xaml" />
+    <None Remove="Pages\ProjectPage.xaml" />
+    <None Remove="Pages\StartupPage.xaml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -50,7 +51,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="Pages\GetStarted.xaml">
+    <Page Update="Pages\GetStartedPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
@@ -60,7 +61,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="Pages\Startup.xaml">
+    <Page Update="Pages\StartupPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>

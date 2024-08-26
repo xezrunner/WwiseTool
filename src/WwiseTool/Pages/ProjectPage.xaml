@@ -17,20 +17,15 @@
         <Style x:Key="RootNavigationViewItemStyle" TargetType="NavigationViewItem">
             <Setter Property="Margin" Value="12,0" />
         </Style>
+
     </Page.Resources>
 
     <Grid>
-        <!--
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition />
-            <ColumnDefinition Width="2*" />
-        </Grid.ColumnDefinitions>
-        -->
 
         <Grid Padding="{StaticResource TitlebarHeightPadding}">
 
             <NavigationView PaneDisplayMode="Left" IsTabStop="False"
-                            IsPaneToggleButtonVisible="False" IsBackButtonVisible="Collapsed">
+                            IsPaneToggleButtonVisible="False" IsBackButtonVisible="Collapsed" IsSettingsVisible="False">
 
                 <NavigationView.PaneHeader>
                     <controls:PaneHeaderHeroButton Glyph="&#xF133;"
@@ -43,7 +38,7 @@
                         <NavigationViewItem.Icon>
                             <FontIcon Glyph="&#xF158;" />
                         </NavigationViewItem.Icon>
-                        
+
                         <NavigationViewItem.MenuItems>
                             <NavigationViewItem Content="AKEvent [2001]" Icon="MusicInfo"/>
                             <NavigationViewItem Content="AKEvent [2001]" Icon="MusicInfo"/>
@@ -53,19 +48,12 @@
                 </NavigationView.MenuItems>
 
                 <Grid>
-                    
+                    <Button HorizontalAlignment="Center" VerticalAlignment="Center" />
                 </Grid>
 
             </NavigationView>
 
         </Grid>
-
-        <!--
-        <Grid Grid.Column="1">
-            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center">Content goes here...</TextBlock>
-
-        </Grid>
-        -->
 
     </Grid>
 

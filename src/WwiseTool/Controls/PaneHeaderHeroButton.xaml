@@ -19,6 +19,10 @@
             <Setter Property="Margin" Value="0,2" />
             <Setter Property="Padding" Value="11,10,11,11" />
         </Style>
+
+
+        <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="{Binding Source={ThemeResource ButtonPointerOverBackgroundThemeBrush}, Path=Color }" />
+        <SolidColorBrush x:Key="ButtonBackgroundPressed"     Color="{Binding Source={ThemeResource ButtonBackgroundPressed}, Path=Color }" />
     </UserControl.Resources>
 
     <Grid>

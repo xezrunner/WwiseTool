@@ -17,10 +17,14 @@
     <Grid x:Name="root" Loaded="root_Loaded"
           Background="{ThemeResource LayerFillColorDefaultBrush}">
 
-        <Frame x:Name="pageFrame" />
+        <Grid.RowDefinitions>
+            <RowDefinition Height="{StaticResource TitlebarGridRowHeight}" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
 
-        <Grid x:Name="titlebar" Loaded="titlebar_Loaded"
-              Height="{StaticResource TitlebarHeight}" VerticalAlignment="Top">
+        <Frame x:Name="pageFrame" Grid.RowSpan="2" />
+
+        <Grid x:Name="titlebar" Grid.Row="0" Loaded="titlebar_Loaded">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition x:Name="titlebarLeftPadding" Width="0" />
                 <ColumnDefinition />

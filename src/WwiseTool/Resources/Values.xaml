@@ -4,7 +4,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:WwiseTool.Resources">
 
-    <x:Double x:Key="TitlebarHeight">32</x:Double>
-    <Thickness x:Key="TitlebarHeightPadding">0,32,0,0</Thickness>
+    <x:Double   x:Key="TitlebarHeight">32</x:Double>
+    <GridLength x:Key="TitlebarGridRowHeight">32</GridLength>
+    <Thickness  x:Key="TitlebarHeightPadding">0,32,0,0</Thickness>
 
 </ResourceDictionary>

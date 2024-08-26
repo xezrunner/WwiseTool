@@ -18,23 +18,31 @@
             <Setter Property="Margin" Value="12,0" />
         </Style>
 
+        <Thickness x:Key="NavigationViewPaneContentGridMargin">12,35,12,3</Thickness>
+        <Thickness x:Key="NavigationViewAutoSuggestBoxMargin">4,0</Thickness>
     </Page.Resources>
 
     <Grid>
 
-        <Grid Padding="{StaticResource TitlebarHeightPadding}">
+        <Grid >
 
             <NavigationView PaneDisplayMode="Left" IsTabStop="False"
                             IsPaneToggleButtonVisible="False" IsBackButtonVisible="Collapsed" IsSettingsVisible="False">
 
                 <NavigationView.PaneHeader>
-                    <controls:PaneHeaderHeroButton Glyph="&#xF133;"
+                    <controls:PaneHeaderHeroButton Glyph="&#xF133;" 
                                                    Title="sfx-global-000.pck"
-                                                   Description="Wwise package file • Dishonored 2" />
+                                                   Description="Wwise package file • Dishonored 2"/>
                 </NavigationView.PaneHeader>
 
+                <NavigationView.AutoSuggestBox>
+                    <AutoSuggestBox PlaceholderText="Find an entry" QueryIcon="Find"
+                                    Margin="0" />
+                </NavigationView.AutoSuggestBox>
+
+                <!-- NavigationView Pane -->
                 <NavigationView.MenuItems>
-                    <NavigationViewItem Content="Bank root" Style="{StaticResource RootNavigationViewItemStyle}">
+                    <NavigationViewItem Content="Bank root">
                         <NavigationViewItem.Icon>
                             <FontIcon Glyph="&#xF158;" />
                         </NavigationViewItem.Icon>
@@ -47,8 +55,14 @@
                     </NavigationViewItem>
                 </NavigationView.MenuItems>
 
+                <!-- NavigationView Content -->
                 <Grid>
-                    <Button HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <controls:SplashIcon Margin="18,48" />
+
+                        <TextBlock Text="Select an event" Style="{StaticResource TitleTextBlockStyle}" />
+                        <TextBlock Text="Details about the selected event will show here." Style="{StaticResource BodyTextBlockStyle}" />
+                    </StackPanel>
                 </Grid>
 
             </NavigationView>

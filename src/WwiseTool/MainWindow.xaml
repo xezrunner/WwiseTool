@@ -6,6 +6,7 @@
     xmlns:local="using:WwiseTool"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:WwiseTool.Controls"
     mc:Ignorable="d" 
     Title="Wwise Tool">
 
@@ -15,7 +16,7 @@
 
     <Grid x:Name="root" Loaded="root_Loaded"
           Background="{ThemeResource LayerFillColorDefaultBrush}">
-        
+
         <Frame x:Name="testFrame" />
 
         <Grid x:Name="titlebar" Loaded="titlebar_Loaded"
@@ -28,12 +29,24 @@
 
             <!-- Titlebar content -->
             <Grid Grid.Column="1">
-                <TextBlock x:Name="titlebarAppTitle" Text="App title"
-                           FontSize="12"
-                           VerticalAlignment="Center" Padding="12,0"/>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <!-- TEMP: titlebar app icon -->
+                <Viewbox Grid.Column="0"
+                         Width="16" Height="16" Margin="12,0"
+                         Stretch="Uniform" StretchDirection="Both" >
+                    <controls:SplashIcon />
+                </Viewbox>
+
+                <TextBlock x:Name="titlebarAppTitle" Text="App title" Grid.Column="1"
+                           FontSize="12" VerticalAlignment="Center"/>
             </Grid>
         </Grid>
-        
+
     </Grid>
-    
+
 </Window>

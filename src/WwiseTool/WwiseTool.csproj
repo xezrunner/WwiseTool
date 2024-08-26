@@ -48,6 +48,9 @@
     <ProjectCapability Include="Msix" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\WwiseTool.Backend\WwiseTool.Backend.csproj" />
+  </ItemGroup>
+  <ItemGroup>
     <Page Update="Controls\PaneHeaderHeroButton.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>

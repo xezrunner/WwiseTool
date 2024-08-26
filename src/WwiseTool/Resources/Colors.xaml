@@ -7,10 +7,16 @@
     <ResourceDictionary.ThemeDictionaries>
         <ResourceDictionary x:Key="Default">
             <SolidColorBrush x:Key="StartupBackground" Color="White" />
+            
+            <SolidColorBrush x:Key="WindowControlHoverBackground" Color="#10000000" />
+            <SolidColorBrush x:Key="WindowControlPressedBackground" Color="#1F000000" />
         </ResourceDictionary>
 
         <ResourceDictionary x:Key="Dark">
             <SolidColorBrush x:Key="StartupBackground" Color="Black" />
+            
+            <SolidColorBrush x:Key="WindowControlHoverBackground" Color="#10FFFFFF" />
+            <SolidColorBrush x:Key="WindowControlPressedBackground" Color="#1FFFFFFF" />
         </ResourceDictionary>
     </ResourceDictionary.ThemeDictionaries>
     

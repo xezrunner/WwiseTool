@@ -1,5 +1,9 @@
+using Microsoft.UI;
 using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Media;
+using System;
+using Windows.UI.ViewManagement;
 using WwiseTool.Pages;
 
 namespace WwiseTool {
@@ -11,7 +15,12 @@ namespace WwiseTool {
             appWindow = this.AppWindow; // cache
 
             ExtendsContentIntoTitleBar = true;
+
+            var uiSettings = new UISettings();
+            uiSettings.ColorValuesChanged += UiSettings_ColorValuesChanged;
         }
+
+        AppWindowTitleBar systemTitleBar;
 
         // NOTE: We have to use the 'root' control for its Loaded event to get and assign the "canonical" XamlRoot.
         // We should only load pages and such after this is assigned, as ContentDialogs need it!
@@ -50,6 +59,22 @@ namespace WwiseTool {
             titlebarRightPadding.Width = new GridLength(appWindow.TitleBar.RightInset / titlebarXamlRoot.RasterizationScale);
 
             SetTitleBar(titlebar);
+
+            var systemTitleBar = App.GLOBAL_WindowInfo.appWindow.TitleBar;
+            setTitlebarWindowControlColors();
+        }
+
+        private void UiSettings_ColorValuesChanged(UISettings sender, object args) {
+            setTitlebarWindowControlColors();
+        }
+
+        void setTitlebarWindowControlColors() {
+            if (systemTitleBar == null) systemTitleBar = App.GLOBAL_WindowInfo.appWindow.TitleBar;
+            if (systemTitleBar == null) throw new Exception("No AppWindow TitleBar!");
+
+            // Window control button colors:
+            systemTitleBar.ButtonHoverBackgroundColor = (Application.Current.Resources["WindowControlHoverBackground"] as SolidColorBrush).Color;
+            systemTitleBar.ButtonPressedBackgroundColor = (Application.Current.Resources["WindowControlPressedBackground"] as SolidColorBrush).Color;
         }
     }
 }

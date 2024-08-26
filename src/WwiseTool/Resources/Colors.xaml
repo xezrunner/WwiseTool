@@ -10,6 +10,9 @@
             
             <SolidColorBrush x:Key="WindowControlHoverBackground" Color="#10000000" />
             <SolidColorBrush x:Key="WindowControlPressedBackground" Color="#1F000000" />
+
+            <SolidColorBrush x:Key="NavigationViewContentBackground" Color="Transparent" />
+            <Thickness       x:Key="NavigationViewContentGridBorderThickness">0</Thickness>
         </ResourceDictionary>
 
         <ResourceDictionary x:Key="Dark">
@@ -17,6 +20,9 @@
             
             <SolidColorBrush x:Key="WindowControlHoverBackground" Color="#10FFFFFF" />
             <SolidColorBrush x:Key="WindowControlPressedBackground" Color="#1FFFFFFF" />
+
+            <SolidColorBrush x:Key="NavigationViewContentBackground" Color="Transparent" />
+            <Thickness       x:Key="NavigationViewContentGridBorderThickness">0</Thickness>
         </ResourceDictionary>
     </ResourceDictionary.ThemeDictionaries>
     

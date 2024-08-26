@@ -6,6 +6,7 @@
     xmlns:local="using:WwiseTool.Pages"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:WwiseTool.Controls"
     mc:Ignorable="d"
     Background="{ThemeResource LayerFillColorDefaultBrush}">
 
@@ -13,33 +14,58 @@
         <Style TargetType="TreeViewItem">
             <Setter Property="MinHeight" Value="40" />
         </Style>
+        <Style x:Key="RootNavigationViewItemStyle" TargetType="NavigationViewItem">
+            <Setter Property="Margin" Value="12,0" />
+        </Style>
     </Page.Resources>
 
     <Grid>
+        <!--
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
             <ColumnDefinition Width="2*" />
         </Grid.ColumnDefinitions>
+        -->
 
         <Grid Padding="{StaticResource TitlebarHeightPadding}">
-            <TreeView>
-                <TreeView.RootNodes>
-                    <TreeViewNode Content="bank-001.bnk" IsExpanded="False">
-                        <TreeViewNode.Children>
-                            <TreeViewNode Content="AkEvent [2001]" />
-                            <TreeViewNode Content="AkEvent [2001]" />
-                            <TreeViewNode Content="AkEvent [2001]" />
-                            <TreeViewNode Content="AkEvent [2001]" />
-                        </TreeViewNode.Children>
-                    </TreeViewNode>
-                </TreeView.RootNodes>
-            </TreeView>
+
+            <NavigationView PaneDisplayMode="Left" IsTabStop="False"
+                            IsPaneToggleButtonVisible="False" IsBackButtonVisible="Collapsed">
+
+                <NavigationView.PaneHeader>
+                    <controls:PaneHeaderHeroButton Glyph="&#xF133;"
+                                                   Title="sfx-global-000.pck"
+                                                   Description="Wwise package file • Dishonored 2" />
+                </NavigationView.PaneHeader>
+
+                <NavigationView.MenuItems>
+                    <NavigationViewItem Content="Bank root" Style="{StaticResource RootNavigationViewItemStyle}">
+                        <NavigationViewItem.Icon>
+                            <FontIcon Glyph="&#xF158;" />
+                        </NavigationViewItem.Icon>
+                        
+                        <NavigationViewItem.MenuItems>
+                            <NavigationViewItem Content="AKEvent [2001]" Icon="MusicInfo"/>
+                            <NavigationViewItem Content="AKEvent [2001]" Icon="MusicInfo"/>
+                            <NavigationViewItem Content="AKEvent [2001]" Icon="MusicInfo"/>
+                        </NavigationViewItem.MenuItems>
+                    </NavigationViewItem>
+                </NavigationView.MenuItems>
+
+                <Grid>
+                    
+                </Grid>
+
+            </NavigationView>
+
         </Grid>
 
+        <!--
         <Grid Grid.Column="1">
             <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center">Content goes here...</TextBlock>
 
         </Grid>
+        -->
 
     </Grid>
 

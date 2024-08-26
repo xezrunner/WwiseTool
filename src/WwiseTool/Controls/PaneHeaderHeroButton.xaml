@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UserControl
+    x:Class="WwiseTool.Controls.PaneHeaderHeroButton"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:WwiseTool.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Margin="12,8">
+
+    <UserControl.Resources>
+        <Style TargetType="Button" BasedOn="{StaticResource DefaultButtonStyle}">
+            <!-- TODO: BUG: no hover/pressed effects in Light mode specifically -->
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+            <Setter Property="Margin" Value="0,2" />
+            <Setter Property="Padding" Value="11,10,11,11" />
+        </Style>
+    </UserControl.Resources>
+
+    <Grid>
+        <Button Click="Button_Click">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <FontIcon Glyph="{x:Bind Glyph}" Grid.Column="0"
+          Margin="12,0,24,0" />
+
+                <StackPanel Grid.Column="1">
+                    <TextBlock Text="{x:Bind Title}"       Style="{StaticResource BodyStrongTextBlockStyle}" />
+                    <TextBlock Text="{x:Bind Description}" Style="{StaticResource CaptionTextBlockStyle}" />
+                </StackPanel>
+            </Grid>
+        </Button>
+    </Grid>
+</UserControl>

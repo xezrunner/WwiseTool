@@ -1,9 +1,6 @@
 using Microsoft.UI.Xaml;
 using WwiseTool.Utilities;
 
-// To learn more about WinUI, the WinUI project structure,
-// and more about our project templates, see: http://aka.ms/winui-project-info.
-
 namespace WwiseTool {
     public partial class App : Application {
         public App() {
@@ -17,8 +14,8 @@ namespace WwiseTool {
 
         protected override void OnLaunched(LaunchActivatedEventArgs args) {
             var mainWindow = new MainWindow();
+            
             GLOBAL_WindowInfo = WindowUtilities.GetInfoForWindow(mainWindow);
-
             WindowUtilities.CenterWindow(GLOBAL_WindowInfo);
 
             mainWindow.Activate();

@@ -10,15 +10,18 @@ namespace WwiseTool {
             this.InitializeComponent();
         }
 
-        public static Window m_window;
+        public static WINUI_WindowInfo GLOBAL_WindowInfo;
 
         // HACK: I don't care about setting the XamlRoot with each dialog. This will be set by the MainWindow.
         public static XamlRoot GLOBAL_XamlRoot;
 
         protected override void OnLaunched(LaunchActivatedEventArgs args) {
-            m_window = new MainWindow();
-            WindowUtilities.CenterWindow(m_window);
-            m_window.Activate();
+            var mainWindow = new MainWindow();
+            GLOBAL_WindowInfo = WindowUtilities.GetInfoForWindow(mainWindow);
+
+            WindowUtilities.CenterWindow(GLOBAL_WindowInfo);
+
+            mainWindow.Activate();
         }
     }
 }

@@ -5,10 +5,10 @@ using Windows.Foundation;
 namespace WwiseTool.Utilities {
     public static class DialogUtilities {
         public static IAsyncOperation<ContentDialogResult> ShowMessageAsync(string title, string message) {
-            return ShowDialogWithContent(title, new TextBlock() { Text = message });
+            return ShowDialogWithContent(title, new TextBlock() { Text = message, TextWrapping = TextWrapping.Wrap });
         }
         public static void ShowMessage(string title, string message) {
-            _ = ShowDialogWithContent(title, new TextBlock() { Text = message });
+            _ = ShowMessageAsync(title, message);
         }
 
         public static IAsyncOperation<ContentDialogResult> ShowDialogWithContent(string title, UIElement content, 

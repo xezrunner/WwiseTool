@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UserControl
+    x:Class="WwiseTool.Controls.DependencyListItem"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:WwiseTool.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <Style TargetType="Expander">
+            <Setter Property="Padding" Value="24,12,24,13" />
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        </Style>
+    </UserControl.Resources>
+
+    <Expander HorizontalAlignment="Stretch">
+        <Expander.Header>
+            <Grid Padding="0,12,0,13" Margin="0,0,-20,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <!-- TODO: optional component icon image? -->
+                <FontIcon Glyph="&#xECAA;" Grid.Column="0"
+                                  Margin="12,0"/>
+
+                <StackPanel Grid.Column="1" Margin="12,0,0,0">
+                    <TextBlock Text="{x:Bind Dependency.FriendlyNameOrName()}" Style="{StaticResource BodyStrongTextBlockStyle}" />
+                    <TextBlock Text="{x:Bind Dependency.TypeFriendlyName()}" />
+                </StackPanel>
+
+                <StackPanel Grid.Column="2" Orientation="Horizontal"
+                            Spacing="8" Margin="12,0">
+
+                    <!-- Required -->
+                    <FontIcon Glyph="&#xE7BA;" 
+                              Foreground="{ThemeResource AccentFillColorTertiaryBrush}" FontSize="16"
+                              Visibility="{x:Bind Dependency.IsOptional, Converter={StaticResource BooleanInverseVisibilityConverter}}" />
+                    <!-- Optional -->
+                    <FontIcon Glyph="&#xECC8;" 
+                              Foreground="{ThemeResource AccentFillColorTertiaryBrush}" FontSize="16"
+                              Visibility="{x:Bind Dependency.IsOptional}" />
+                    <!-- Manual intervention -->
+                    <FontIcon Glyph="&#xEA8D;" 
+                              Foreground="{ThemeResource AccentFillColorTertiaryBrush}" FontSize="16"
+                              Visibility="{x:Bind Dependency.PrimaryDownloadURL, Converter={StaticResource NullVisibilityConverter}}" />
+
+                    <!-- Quick download button -->
+                    <Button Style="{StaticResource CommandBarFlyoutEllipsisButtonStyle}" MinHeight="0"
+                            Visibility="Collapsed">
+                        <FontIcon Glyph="&#xEBD3;" FontSize="14" />
+                    </Button>
+
+                </StackPanel>
+            </Grid>
+        </Expander.Header>
+
+        <StackPanel Spacing="12">
+            <StackPanel>
+                <TextBlock Text="Usage" FontWeight="Bold" />
+                <TextBlock Text="{x:Bind Dependency.UsageDescription, TargetNullValue='No usage description provided.'}"/>
+            </StackPanel>
+
+            <!-- Optionalities -->
+            <StackPanel>
+                <StackPanel Orientation="Horizontal" Visibility="{x:Bind Dependency.IsOptional, Converter={StaticResource BooleanInverseVisibilityConverter}}">
+                    <FontIcon Glyph="&#xE7BA;"
+                                  Foreground="{ThemeResource AccentFillColorTertiaryBrush}" />
+                    <TextBlock Text="This component is required for the application to function."
+                                   Padding="8,0"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Visibility="{x:Bind Dependency.IsOptional}">
+                    <FontIcon Glyph="&#xECC8;"
+              Foreground="{ThemeResource AccentFillColorTertiaryBrush}" />
+                    <TextBlock Text="This component is optional and can be downloaded later."
+               Padding="8,0"/>
+                </StackPanel>
+
+                <!-- TODO: Manual intervention dependencies! -->
+                <StackPanel Orientation="Horizontal" Visibility="{x:Bind Dependency.PrimaryDownloadURL, Converter={StaticResource NullVisibilityConverter}}">
+                    <FontIcon Glyph="&#xE822;"
+Foreground="{ThemeResource AccentFillColorTertiaryBrush}" />
+                    <TextBlock Text="This component requires manual intervention."
+ Padding="8,0"/>
+                </StackPanel>
+            </StackPanel>
+
+            <!-- Project URL -->
+            <StackPanel Spacing="8"
+                        Visibility="{x:Bind Dependency.ProjectURL, Converter={StaticResource NotNullVisibilityConverter}}">
+                <TextBlock Text="Project website" FontWeight="Bold" />
+                <HyperlinkButton Content="{x:Bind Dependency.ProjectURL}" />
+            </StackPanel>
+
+            <!-- Download links -->
+            <StackPanel Spacing="8"
+                        Visibility="{x:Bind Dependency.PrimaryDownloadURL, Converter={StaticResource NotNullVisibilityConverter}}">
+                <TextBlock Text="Download link(s)" FontWeight="Bold" />
+                <HyperlinkButton Content="{x:Bind Dependency.PrimaryDownloadURL}" />
+                <HyperlinkButton Content="{x:Bind Dependency.SecondaryDownloadURL}" Visibility="Collapsed" />
+                <!-- TODO: Download links-->
+            </StackPanel>
+
+            <!-- Download and install button -->
+            <HyperlinkButton Visibility="{x:Bind Dependency.PrimaryDownloadURL, Converter={StaticResource NotNullVisibilityConverter}}"
+                             HorizontalAlignment="Stretch">
+                <StackPanel Orientation="Horizontal" Spacing="12">
+                    <FontIcon Glyph="&#xEBD3;" FontSize="16" VerticalAlignment="Center" />
+                    <TextBlock Text="Download &amp; install dependency" />
+                </StackPanel>
+            </HyperlinkButton>
+        </StackPanel>
+    </Expander>
+
+</UserControl>

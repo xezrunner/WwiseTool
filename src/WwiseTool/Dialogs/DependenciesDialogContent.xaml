@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UserControl
+    x:Name="root" x:Class="WwiseTool.Dialogs.DependenciesDialogContent"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:WwiseTool.Dialogs"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:WwiseTool.Controls"
+    xmlns:depsystem="using:WwiseTool.Backend"
+    mc:Ignorable="d"
+    Loaded="root_Loaded">
+
+    <UserControl.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="TextWrapping" Value="Wrap" />
+        </Style>
+
+        <Style TargetType="Expander">
+            <Setter Property="Padding" Value="24,12,24,13" />
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        </Style>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <StackPanel Spacing="8" Grid.Row="0">
+            <!-- Debug -->
+            <Expander Header="🚧 UI Debug" Visibility="{x:Bind isDebugEnabled}">
+                <StackPanel Spacing="8">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="result.answer:" Style="{StaticResource MonospaceTextStyle}"
+                            VerticalAlignment="Center"/>
+                        <ComboBox x:Name="debugAnswerComboBox" ItemsSource="{x:Bind DependencyManagerAnswerNames}"
+                            Loaded="debugAnswerComboBox_Loaded" SelectionChanged="debugAnswerComboBox_SelectionChanged"
+                            Margin="12,0"/>
+                    </StackPanel>
+
+                    <TextBlock Style="{StaticResource MonospaceTextStyle}">
+                        <Run Text="{x:Bind dependencyManagerResult.answer}" /> <LineBreak />
+                        areRequiredDependenciesMissing:     <Run Text="{x:Bind areRequiredDependenciesMissing,     Mode=OneWay}" /> <LineBreak />
+                        areOptionalDependenciesMissing:     <Run Text="{x:Bind areOptionalDependenciesMissing,     Mode=OneWay}" /> <LineBreak />
+                        areOnlyOptionalDependenciesMissing: <Run Text="{x:Bind areOnlyOptionalDependenciesMissing, Mode=OneWay}" />
+                    </TextBlock>
+                </StackPanel>
+            </Expander>
+
+            <TextBlock Visibility="{x:Bind areRequiredDependenciesMissing, Mode=OneWay}">
+                One or more required dependencies are missing. <LineBreak />
+                Ensure all required dependencies are downloaded for the application to function.
+            </TextBlock>
+            <TextBlock Visibility="{x:Bind areOnlyOptionalDependenciesMissing, Mode=OneWay}">
+                Some optional dependencies are missing. <LineBreak />
+                These are not strictly required for the application to function.
+            </TextBlock>
+        </StackPanel>
+
+        <!-- Content -->
+        <Grid Grid.Row="1" Padding="0,12">
+            <ScrollViewer>
+                <!--<ListView ItemsSource="{x:Bind dependencyManagerResult.dependencies}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate x:DataType="depsystem:Dependency">
+                            <controls:DependencyListItem Dependency="{x:Bind}" />
+                            --><!--<TextBlock Text="{x:Bind Path=Name}" />--><!--
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>-->
+
+                <StackPanel x:Name="dependencyListStackPanel" Loaded="dependencyListStackPanel_Loaded"
+                            Spacing="4">
+
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+
+        <!-- Footer -->
+        <StackPanel Grid.Row="2">
+            <TextBlock Visibility="{x:Bind areRequiredDependenciesMissing, Mode=OneWay}"
+                       HorizontalAlignment="Center">
+                The application cannot continue execution without these dependencies.
+            </TextBlock>
+            
+            <TextBlock Visibility="{x:Bind areOnlyOptionalDependenciesMissing, Mode=OneWay}">
+                    You can download these optional dependencies later from Settings, or when the application attempts to use it.
+            </TextBlock>
+        </StackPanel>
+
+    </Grid>
+
+</UserControl>

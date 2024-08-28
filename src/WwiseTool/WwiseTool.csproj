@@ -14,12 +14,13 @@
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Colors.xaml" />
-    <None Remove="Controls\ActionButton.xaml" />
-    <None Remove="Controls\PaneHeaderHeroButton.xaml" />
+    <None Remove="Controls\DependencyListItem.xaml" />
     <None Remove="Controls\SplashIcon.xaml" />
+    <None Remove="Dialogs\DependenciesDialogContent.xaml" />
     <None Remove="Pages\GetStartedPage.xaml" />
     <None Remove="Pages\ProjectPage.xaml" />
     <None Remove="Pages\StartupPage.xaml" />
+    <None Remove="Resources\Styles.xaml" />
     <None Remove="Resources\Values.xaml" />
   </ItemGroup>
 
@@ -49,6 +50,16 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\WwiseTool.Backend\WwiseTool.Backend.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Controls\DependencyListItem.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Resources\Styles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Controls\PaneHeaderHeroButton.xaml">
@@ -87,6 +98,11 @@
   </ItemGroup>
   <ItemGroup>
     <Page Update="Resources\Values.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Dialogs\DependenciesDialogContent.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>

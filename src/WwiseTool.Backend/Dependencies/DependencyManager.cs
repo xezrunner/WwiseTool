@@ -35,12 +35,12 @@ namespace WwiseTool.Backend {
         ];
     }
 
-    public enum DependencyManagerAnswer { 
+    [Flags] public enum DependencyManagerAnswer {
         InvalidDependencyList       = 0,
-        DependencyPathError         = 1,
-        MissingRequiredDependencies = 2,
-        MissingOptionalDependencies = 3,
-        OK                          = 4,
+        DependencyPathError         = 1 << 0,
+        MissingRequiredDependencies = 1 << 1,
+        MissingOptionalDependencies = 1 << 2,
+        OK                          = 1 << 3,
     }
 
     public struct DependencyManagerResult {
@@ -103,12 +103,16 @@ namespace WwiseTool.Backend {
                 }
             }
 
-            if (foundRequired + foundOptional == dependencies.Length) return new(DependencyManagerAnswer.OK, dependencies);
+            DependencyManagerResult result = new() { dependencies = dependencies };
 
-            if (foundRequired == dependencies.Where(d => !d.IsOptional).Count())
-                return new(DependencyManagerAnswer.MissingOptionalDependencies, dependencies, GetMissingDependencies());
+            if (foundRequired + foundOptional == dependencies.Length) result.answer = DependencyManagerAnswer.OK;
+            else {
+                result.missingDependencies = GetMissingDependencies();
+                if (foundRequired != dependencies.Where(d => !d.IsOptional).Count()) result.answer  = DependencyManagerAnswer.MissingRequiredDependencies;
+                if (foundOptional != dependencies.Where(d =>  d.IsOptional).Count()) result.answer |= DependencyManagerAnswer.MissingOptionalDependencies;
+            }
 
-            return new(DependencyManagerAnswer.MissingRequiredDependencies, dependencies, GetMissingDependencies());
+            return result;
 #else
             List<(string path, string name)> localDirs = new();
             try {

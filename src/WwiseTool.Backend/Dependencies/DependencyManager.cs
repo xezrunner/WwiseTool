@@ -1,17 +1,42 @@
-﻿using System.Diagnostics;
-
 namespace WwiseTool.Backend {
     public struct Dependency {
-        public string Name;                 // used for local directory name as well
-        public string FriendlyName;
-        public string UsageDescription;
-        public bool   IsOptional;
+        public string         Name;             // used for local directory name as well
+        public string         FriendlyName;
+        public string         UsageDescription; 
+        public bool           IsOptional;       // TODO: manual intervention components!    
+        public DependencyType Type;
+
         public string ProjectURL;
+
+        // TODO: array instead?
         public string PrimaryDownloadURL;   // from Source
         public string SecondaryDownloadURL; // from our project
 
+        // TODO: combine with internal (abstract) type instead?
         public bool   IsPresent;
         public string FilePath; // Path on disk to the local dependency
+
+        // TODO: should these be functions or getters?
+        public string FriendlyNameOrName() => !String.IsNullOrEmpty(FriendlyName) ? FriendlyName : Name;
+        public string TypeFriendlyName()   => Type.ToFriendlyName();
+    }
+
+    public enum DependencyType {
+        Other, Asset,
+        PortableApplication, PortableLibrary,
+        InstallableApplication, InstallableLibrary,
+    }
+    static class DependencyTypeExtensions {
+        public static string ToFriendlyName(this DependencyType dependencyType) {
+            switch (dependencyType) {
+                case DependencyType.PortableApplication:    return "Application (portable)";
+                case DependencyType.PortableLibrary:        return "Library (portable)";
+                case DependencyType.InstallableApplication: return "Application (installation)";
+                case DependencyType.InstallableLibrary:     return "Library (installation)";
+                case DependencyType.Asset:                  return "Asset";
+                default:                                    return dependencyType.ToString();
+            }
+        }
     }
 
     // TODO: move out the dependency system from WwiseTool!
@@ -24,14 +49,22 @@ namespace WwiseTool.Backend {
                 Name               = "QuickBMS",
                 FriendlyName       = "QuickBMS",
                 UsageDescription   = "QuickBMS is used for the extraction of .pck (Wwise file package) files.",
+                Type               = DependencyType.PortableApplication,
                 ProjectURL         = "https://aluigi.altervista.org/quickbms.htm",
-                PrimaryDownloadURL = "https://aluigi.altervista.org/papers/quickbms.zip"
+                PrimaryDownloadURL = "https://aluigi.altervista.org/papers/quickbms.zip",
             },
             new Dependency() {
                 Name               = "QuickBMS_pck_script",
                 FriendlyName       = "QuickBMS .pck script",
                 UsageDescription   = "This script is used with QuickBMS for the extraction of .pck (Wwise file package) files.",
+                Type               = DependencyType.Asset,
             },
+            new Dependency() {
+                Name               = "dep_opt_test",
+                FriendlyName       = "Optional dependency test",
+              //UsageDescription   = "Test dependency - do not use!",
+                IsOptional         = true,
+            }
         ];
     }
 

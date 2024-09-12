@@ -31,7 +31,8 @@
         </Grid.RowDefinitions>
 
         <!-- Header -->
-        <StackPanel Spacing="8" Grid.Row="0">
+        <StackPanel Grid.Row="0"
+                    Spacing="8">
             <!-- Debug -->
             <Expander Header="🚧 UI Debug" Visibility="{x:Bind isDebugEnabled}">
                 <StackPanel Spacing="8">
@@ -52,29 +53,60 @@
                 </StackPanel>
             </Expander>
 
-            <TextBlock Visibility="{x:Bind areRequiredDependenciesMissing, Mode=OneWay}">
-                One or more required dependencies are missing. <LineBreak />
-                Ensure all required dependencies are downloaded for the application to function.
-            </TextBlock>
-            <TextBlock Visibility="{x:Bind areOnlyOptionalDependenciesMissing, Mode=OneWay}">
-                Some optional dependencies are missing. <LineBreak />
-                These are not strictly required for the application to function.
-            </TextBlock>
+            <!-- Hard Error -->
+            <Grid Visibility="{x:Bind isHardError}" ColumnSpacing="16">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <FontIcon Glyph="&#xEB90;" Foreground="Red"
+                          FontSize="32" Margin="0,6" VerticalAlignment="Top"/>
+
+                <StackPanel Grid.Column="1" 
+                            VerticalAlignment="Center">
+                    <TextBlock Text="Dependencies error" Style="{StaticResource SubtitleTextBlockStyle}" Visibility="Collapsed" />
+                    <TextBlock Text="The dependency manager has encountered an error." Style="{StaticResource BodyStrongTextBlockStyle}" />
+                    <TextBlock Text="The application cannot continue execution." />
+
+                    <StackPanel Margin="0,12,0,0">
+                        <TextBlock Text="Reason" Style="{StaticResource BodyStrongTextBlockStyle}" />
+                        <TextBlock Text="{x:Bind dependencyManagerResult.error, TargetNullValue='Unknown'}" />
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+
+            <!-- Soft Error -->
+            <StackPanel Visibility="{x:Bind isError}">
+                <TextBlock Visibility="{x:Bind areRequiredDependenciesMissing, Mode=OneWay}">
+    One or more required dependencies are missing. <LineBreak />
+    Ensure all required dependencies are downloaded for the application to function.
+                </TextBlock>
+                <TextBlock Visibility="{x:Bind areOnlyOptionalDependenciesMissing, Mode=OneWay}">
+    Some optional dependencies are missing. <LineBreak />
+    These are not strictly required for the application to function.
+                </TextBlock>
+            </StackPanel>
+            
         </StackPanel>
 
         <!-- Content -->
-        <Grid Grid.Row="1" Padding="0,12">
-            <ScrollViewer>
+        <Grid Grid.Row="1" Visibility="{x:Bind isHardError, Converter={StaticResource BooleanInverseVisibilityConverter}}"
+              Margin="0,8">
+            <ScrollViewer HorizontalScrollMode="Disabled" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
                 <!--<ListView ItemsSource="{x:Bind dependencyManagerResult.dependencies}">
                     <ListView.ItemTemplate>
                         <DataTemplate x:DataType="depsystem:Dependency">
                             <controls:DependencyListItem Dependency="{x:Bind}" />
-                            --><!--<TextBlock Text="{x:Bind Path=Name}" />--><!--
+                            -->
+                <!--<TextBlock Text="{x:Bind Path=Name}" />-->
+                <!--
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>-->
 
-                <StackPanel x:Name="dependencyListStackPanel" Loaded="dependencyListStackPanel_Loaded"
+                <StackPanel x:Name="dependencyListStackPanel"
+                            Loaded="dependencyListStackPanel_Loaded"
                             Spacing="4">
 
                 </StackPanel>
@@ -85,9 +117,9 @@
         <StackPanel Grid.Row="2">
             <TextBlock Visibility="{x:Bind areRequiredDependenciesMissing, Mode=OneWay}"
                        HorizontalAlignment="Center">
-                The application cannot continue execution without these dependencies.
+                The application cannot continue without required dependencies.
             </TextBlock>
-            
+
             <TextBlock Visibility="{x:Bind areOnlyOptionalDependenciesMissing, Mode=OneWay}">
                     You can download these optional dependencies later from Settings, or when the application attempts to use it.
             </TextBlock>

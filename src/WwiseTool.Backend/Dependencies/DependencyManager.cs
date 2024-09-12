@@ -17,8 +17,8 @@ namespace WwiseTool.Backend {
         public string FilePath; // Path on disk to the local dependency
 
         // TODO: should these be functions or getters?
-        public string FriendlyNameOrName() => !String.IsNullOrEmpty(FriendlyName) ? FriendlyName : Name;
-        public string TypeFriendlyName()   => Type.ToFriendlyName();
+        public string FriendlyNameOrName { get { return !String.IsNullOrEmpty(FriendlyName) ? FriendlyName : Name; } }
+        public string TypeFriendlyName   { get { return Type.ToFriendlyName(); } }
     }
 
     public enum DependencyType {
@@ -123,7 +123,6 @@ namespace WwiseTool.Backend {
                 }
             }
 
-#if true
             int foundRequired = 0;
             int foundOptional = 0;
             for (int i = 0; i < dependencies.Length; ++i) {
@@ -146,23 +145,6 @@ namespace WwiseTool.Backend {
             }
 
             return result;
-#else
-            List<(string path, string name)> localDirs = new();
-            try {
-                string[]? localDependencyDirPaths = Directory.GetDirectories(dependenciesDirPath);
-                foreach (var path in localDependencyDirPaths) {
-                    localDirs.Add((path, path.Split(Path.PathSeparator).Last()));
-                }
-            } catch (Exception ex) {
-                return new(DependencyManagerAnswer.DependencyPathError, ex.Message);
-            }
-
-            Debugger.Break(); // verify the names!
-
-            foreach (var dir in localDirs) {
-                
-            }
-#endif
         }
 
         public Dependency[] GetMissingDependencies() => dependencies.Where(d => !d.IsPresent).ToArray();
@@ -170,6 +152,7 @@ namespace WwiseTool.Backend {
         // NOTE: DO NOT USE
         public void DEBUG_CreateTestDependencyDirectories() {
             Directory.CreateDirectory(Path.Combine(dependenciesDirPath, "QuickBMS"));
+            Directory.CreateDirectory(Path.Combine(dependenciesDirPath, "QuickBMS_pck_script"));
         }
     }
 }

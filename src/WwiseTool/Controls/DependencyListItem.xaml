@@ -30,8 +30,8 @@
                                   Margin="12,0"/>
 
                 <StackPanel Grid.Column="1" Margin="12,0,0,0">
-                    <TextBlock Text="{x:Bind Dependency.FriendlyNameOrName()}" Style="{StaticResource BodyStrongTextBlockStyle}" />
-                    <TextBlock Text="{x:Bind Dependency.TypeFriendlyName()}" />
+                    <TextBlock Text="{x:Bind Dependency.FriendlyNameOrName}" Style="{StaticResource BodyStrongTextBlockStyle}" />
+                    <TextBlock Text="{x:Bind Dependency.TypeFriendlyName}" />
                 </StackPanel>
 
                 <StackPanel Grid.Column="2" Orientation="Horizontal"
@@ -39,15 +39,15 @@
 
                     <!-- Manual intervention -->
                     <FontIcon Glyph="&#xEA8D;" 
-                              Foreground="{ThemeResource AccentFillColorTertiaryBrush}" FontSize="16"
+                              Foreground="{ThemeResource TextFillColorPrimary}" FontSize="16"
                               Visibility="{x:Bind Dependency.PrimaryDownloadURL, Converter={StaticResource NullVisibilityConverter}}" />
                     <!-- Required -->
                     <FontIcon Glyph="&#xE7BA;" 
-                              Foreground="{ThemeResource AccentFillColorTertiaryBrush}" FontSize="16"
+                              Foreground="{ThemeResource TextFillColorPrimary}" FontSize="16"
                               Visibility="{x:Bind Dependency.IsOptional, Converter={StaticResource BooleanInverseVisibilityConverter}}" />
                     <!-- Optional -->
                     <FontIcon Glyph="&#xECC8;" 
-                              Foreground="{ThemeResource AccentFillColorTertiaryBrush}" FontSize="16"
+                              Foreground="{ThemeResource TextFillColorPrimary}" FontSize="16"
                               Visibility="{x:Bind Dependency.IsOptional}" />
 
                     <!-- Quick download button -->
@@ -108,13 +108,14 @@ Foreground="{ThemeResource AccentFillColorTertiaryBrush}" />
             </StackPanel>
 
             <!-- Download and install button -->
-            <HyperlinkButton Visibility="{x:Bind Dependency.PrimaryDownloadURL, Converter={StaticResource NotNullVisibilityConverter}}"
-                             HorizontalAlignment="Stretch">
+            <Button Style="{StaticResource AccentButtonStyle}" 
+                    HorizontalAlignment="Stretch"
+                    Visibility="{x:Bind Dependency.PrimaryDownloadURL, Converter={StaticResource NotNullVisibilityConverter}}">
                 <StackPanel Orientation="Horizontal" Spacing="12">
                     <FontIcon Glyph="&#xEBD3;" FontSize="16" VerticalAlignment="Center" />
                     <TextBlock Text="Download &amp; install dependency" />
                 </StackPanel>
-            </HyperlinkButton>
+            </Button>
         </StackPanel>
     </Expander>
 

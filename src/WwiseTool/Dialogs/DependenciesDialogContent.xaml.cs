@@ -1,9 +1,11 @@
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+
 using System;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
+
 using WwiseTool.Backend;
 using WwiseTool.Controls;
 
@@ -14,7 +16,6 @@ namespace WwiseTool.Dialogs {
         }
 
         DependencyManagerResult dependencyManagerResult;
-
         ContentDialog parentDialog;
 
         public DependenciesDialogContent(DependencyManagerResult dependencyManagerResult) {
@@ -30,7 +31,7 @@ namespace WwiseTool.Dialogs {
             RefreshContentDialogProperties();
         }
 
-        bool isDebugEnabled = false;
+        public bool isDebugEnabled = false;
 
         bool isError                            { get { return dependencyManagerResult.answer != DependencyManagerAnswer.OK; } }
         bool areRequiredDependenciesMissing     { get { return dependencyManagerResult.answer.HasFlag(DependencyManagerAnswer.MissingRequiredDependencies); } }
@@ -76,6 +77,10 @@ namespace WwiseTool.Dialogs {
 
             // HACK: update dialog layout:
             RefreshContentDialogProperties();
+        }
+
+        private void TEMP_EnableDynamicSizingToggle_Toggled(object sender, RoutedEventArgs e) {
+            DynamicContainer.GLOBAL_EnableDynamicSizing = TEMP_EnableDynamicSizingToggle.IsOn;
         }
     }
 }
